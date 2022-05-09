@@ -8,10 +8,11 @@ const index = (req, res) => {
     .catch((error) => res.send(error));
 };
 const view = async (req, res) => {
-  const id = req.params;
+  const id = req.params.id.trim();
   try {
-    const productid = await Product.find({ _id: ObjectId(id) });
-    res.send(productid);
+     await Product.find({ "_id": ObjectId(id) })
+     .then((result) => res.send(result))
+     .catch((error) => res.send(error));
   } catch (error) {
     res.send(error);
   }
