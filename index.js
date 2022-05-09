@@ -8,6 +8,7 @@ const path = require("path");
 const BodyParser = require("body-parser");
 const db = require("./config/mongoose");
 
+
 app.use(BodyParser.json()); // for parsing application/json
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(router);
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
+const server = app.listen(process.env.PORT || 5000, () => {
+  const port = server.address().port;
+  console.log(`Express is working on port ${port}`);
+});
