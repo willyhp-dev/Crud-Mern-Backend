@@ -1,4 +1,4 @@
-const router = require('Express').Router();
+const router = require('express').Router();
 const ProductController = require('./Controller');
 const multer = require("multer");
 const upload = multer({ dest: "uploads" });
