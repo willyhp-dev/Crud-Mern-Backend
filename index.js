@@ -7,13 +7,7 @@ const logger = require("morgan");
 const path = require("path");
 const BodyParser = require("body-parser");
 const db = require("./config/mongoose");
-var https=require('https');
-var server=https.createServer(function(req,res){
-  res.end('test');
-});
-server.on('listening',function(){
-  console.log('ok, server is running');
-});
+
 app.use(BodyParser.json()); // for parsing application/json
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(router);
@@ -28,6 +22,7 @@ app.use((req, res, next) => {
     message: "Resource" + req.originalUrl + " NotFound",
   });
 });
+
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
