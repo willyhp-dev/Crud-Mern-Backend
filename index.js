@@ -9,6 +9,7 @@ const BodyParser = require("body-parser");
 const db = require("./config/mongoose");
 
 
+
 app.use(BodyParser.json()); // for parsing application/json
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(router);
