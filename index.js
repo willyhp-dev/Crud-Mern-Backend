@@ -7,7 +7,13 @@ const logger = require("morgan");
 const path = require("path");
 const BodyParser = require("body-parser");
 const db = require("./config/mongoose");
-
+var https=require('https');
+var server=https.createServer(function(req,res){
+  res.end('test');
+});
+server.on('listening',function(){
+  console.log('ok, server is running');
+});
 app.use(BodyParser.json()); // for parsing application/json
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(router);
@@ -24,4 +30,4 @@ app.use((req, res, next) => {
 });
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+server.listen(PORT, () => console.log(`Listening on ${PORT}`));
