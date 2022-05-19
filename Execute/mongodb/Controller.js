@@ -6,14 +6,14 @@ const index = (req, res) => {
   db.collection("Product")
     .find()
     .toArray()
-    .then((result) => res.send(result).catch((error) => res.send(error)));
+    .then((result) => res.send(result).catch((error) => console.log(error)));
 };
 const view = (req, res) => {
   const id = req.params;
   db.collection("Product")
     .findOne({ _id: ObjectId(id) })
     .then((result) => res.json(result))
-    .catch((error) => res.json(error));
+    .catch((error) => console.log(error));
 };
 const store = (req, res) => {
   const { name, stock, price, status } = req.body;
@@ -30,13 +30,13 @@ const store = (req, res) => {
         image_url: `http://localhost:3000/public/${image.originalname}`,
       })
       .then((result) => res.send(result))
-      .catch((error) => res.send(error));
+      .catch((error) => console.log(error));
   }
 };
 const Update = (req, res) => {
   const update = req.body;
   const image = req.file;
-  const id = req.params;
+  const {id }= req.params;
   if (image) {
     const target = path.join(__dirname, "../../uploads", image.originalname);
     fs.renameSync(image.path, target);
@@ -66,7 +66,7 @@ const Delete = (req, res) => {
   db.collection("Product")
     .deleteOne({ _id: ObjectId(id) })
     .then((result) => res.send(result))
-    .catch((error) => res.send(error));
+    .catch((error) => console.log(error));
 };
 
 module.exports = {
